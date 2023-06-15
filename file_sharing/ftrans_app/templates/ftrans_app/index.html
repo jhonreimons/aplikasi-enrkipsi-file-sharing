@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}File{% endblock %}
+
+{% block content %}
+
+
+<h1>Folder Sharing</h1>
+{% for file in files %}
+<a href="{{ file.name }}" class="file-link" id="file-link">
+<ul class="folder-list">
+  <li data-id="{{ file.name }}">    
+    <div class="folder-icon"></div>
+    <div class="folder-info">
+        <div class="folder-name">{{ file.name }}</div>
+        <div class="folder-size"><span id="size">{{file.size}}</span></div>
+      </div>
+    </li>
+    </ul>
+  </a>
+  <div class="modal" id="download-modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Download File</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div> 
+        <form method="POST" action="{% url 'ftrans_app:encrypt_file' %}" id="my-form">
+          {% csrf_token %}
+        <div class="modal-body">
+          <p>Masukkan username</p>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" name="username" placeholder="username">
+        </div>
+        <div class="modal-body">
+          <input id="input-url" action="url" type="text" class="form-control" name="name" placeholder="name">
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" name="submit" onclick="showSuccessMessage()" value="submit" class="btn btn-primary">
+            Download
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div> 
+{% endfor %} 
+  
+{% endblock %}

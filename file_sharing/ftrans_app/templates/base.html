@@ -1,0 +1,92 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% comment %} <link rel="stylesheet" href="/style/style.css"> {% endcomment %}
+    {% bootstrap_css %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384/BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEIEL"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+  {% include 'navbar.html' %}
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    {% bootstrap_javascript %}
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>   
+
+        $(document).ready(function() {
+            $('.file-link').click(function(event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+                $('#download-form').attr('action', url);
+                $('#download-modal').modal('show');
+                var url = url;
+                // Masukkan nilai URL ke dalam atribut value elemen input dengan id "input-url"
+                $("#input-url").val(url);
+            });
+        });
+        
+
+    $(document).ready(function() {
+    $('.close').click(function(event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        $('#download-form').attr('action', url);
+        $('#download-modal').modal('hide');
+    });
+});
+
+$(document).ready(function() {
+        $('#close').click(function(event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        $('#download-form').attr('action', url);
+        $('#download-modal').modal('hide');
+    });
+});
+
+$(document).ready(function() {
+    $('a').click(function() {
+        var value = $(this).attr('data-value');
+        $('#input1').val(value);
+    });
+});
+
+
+var size = parseInt('{{ info.data_size }}');
+
+    
+    // Fungsi untuk mengonversi ukuran file menjadi format yang lebih mudah dibaca
+function formatFileSize(size) {
+    var units = ['B', 'KB', 'MB', 'GB', 'TB'];
+    var index = 0;
+    while (size >= 1024 && index < units.length - 1) {
+        size /= 1024;
+        index++;
+      }
+      return size.toFixed(2) + ' ' + units[index];
+    }
+
+    // Mengisi nilai ukuran file ke elemen HTML
+document.getElementById("filesize").textContent = formatFileSize(size);
+
+
+function showSuccessMessage() {
+    swal("File Berhasil Di enrkripsi", "You clicked the button!", "success")
+    .then(function() {
+    })
+}
+
+    </script>
+</body>
+</html>

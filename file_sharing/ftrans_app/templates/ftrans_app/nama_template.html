@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Generated Key{% endblock %}
+
+{% block content %}
+
+    <h1>Generated Keys</h1>
+    {% for user in users %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 offset-md-">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Form Output</h3>
+            <div class="form-group">
+              <label class="output-label" for="username">Username:</label>
+              <p id="output-username">{{ user.username }}</p>
+            </div>
+            <div class="form-group">
+              <label class="output-label" for="email">Email:</label>
+              <p id="output-email">{{ user.email }}</p>
+            </div>
+            <div class="form-group">
+              <label class="output-label" for="passphrase">Passphrase:</label>
+              <p id="output-passphrase">{{ user.passphrase }}</p>
+            </div>
+            <div class="form-group">
+              <label class="output-label" for="publicKey">Public Key:</label>
+              <p id="output-publickey"><pre>{{ user.public_key }}</pre></p>
+            </div>
+            <div class="form-group">
+              <label class="output-label" for="privateKey">Private Key:</label>
+              <p id="output-privateKey"><pre>{{ user.private_key }}</pre></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %} 
+  
+{% endblock %}

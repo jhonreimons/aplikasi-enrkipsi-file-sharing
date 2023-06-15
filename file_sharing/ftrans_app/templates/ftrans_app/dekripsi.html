@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Dekripsi{% endblock %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Form Dekripsi</h2>
+                <form method="POST" action="{% url 'ftrans_app:decrypt_file' %}" enctype="multipart/form-data" id="my-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="fileInput">File Enkripsi</label>
+                        <input type="file" class="form-control" name="file" id="fileInput" accept=".enc">
+                    </div>
+                    <div class="form-group">
+                        <label for="privateKeyInput">Private Key</label>
+                        <input type="text" name="private" class="form-control" id="privateKeyInput" placeholder="Masukkan Private Key">
+                    </div>
+                    <div class="form-group">
+                        <label for="passphraseInput">Passphrase</label>
+                        <input type="password" name="passphrase" class="form-control" id="passphraseInput" placeholder="Masukkan Passphrase">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

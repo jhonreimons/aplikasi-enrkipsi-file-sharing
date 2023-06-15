@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}File{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Informasi Hasil Enkripsi</h1>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Runtime Enkripsi</h5>
+        <p class="card-text" id="runtime">{{ info.elapsed_time }} detik</p>
+        <h5 class="card-title">Publik key yang di gunakan</h5>
+        <p class="card-text" id="runtime"><pre>{{ info.public_key }}</pre></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Informasi File</h5>
+        <p class="card-text">Nama File: <span id="filename">{{ info.file_name }}</span></p>
+        <p class="card-text">Ukuran File: <span id="filesize"></span></p>
+        <form action="{% url 'ftrans_app:download_file' %}" method="post">
+        {% csrf_token %}
+          <input type="hidden" class="form-control" name="file_name" placeholder="file_name" value="{{ info.file_name }}">
+        <button type="submit" class="btn btn-primary">Download</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+{% endblock %}

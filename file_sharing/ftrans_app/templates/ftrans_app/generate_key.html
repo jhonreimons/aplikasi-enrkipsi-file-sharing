@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}File{% endblock %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+        <h2>Form generate Key</h2>
+<form method="post" action="{% url 'ftrans_app:generateKey' %}">
+    {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email">
+            </div>
+            <div class="form-group">
+                <label for="passphrase">Passphrase</label>
+                <input type="password" class="form-control" id="passphrase" name="passphrase"
+                    placeholder="Masukkan passphrase">
+            </div>
+            <button type="submit" class="btn btn-primary">Daftar</button>
+        </form>
+    </div>
+{% endblock %}
